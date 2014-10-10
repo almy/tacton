@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script language="JavaScript" type="text/javascript" src="jquery-2.1.1.min.js"></script>
+<script>
+
+    //When DOM loaded we attach click event to button
+    $(document).ready(function() {
+
+    var data;
+
+        $.ajax({
+                url: "http://localhost:8181/v1/cart/print/organisation",
+                type: "GET",
+                crossDomain: true,
+                dataType: 'jsonp',
+                //force to handle it as text
+                dataType: "text",
+                success: function(data) {
+                    data = $.parseJSON(data);
+
+
+                }
+            });
+
+
+        printOrganisation();
+
+
+
+    function printOrganisation() {
+
+    }
+
+    });
+</script>
