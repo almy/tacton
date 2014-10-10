@@ -30,7 +30,7 @@ public class WebCartRest
 	public ShoppingCart getTransaction(@PathVariable("id") int cartId)
 	{
 		log.info("retrieving web card with id {}" , cartId);
-		return null;
+		return webCartService.getShoppingCart();
 	}
 
 
@@ -38,7 +38,7 @@ public class WebCartRest
 	public Organisation getTransaction()
 	{
 		log.info("getting all information for the organisation");
-		return webCartService.getOrganisationRoot();
+		return webCartService.getOrganisation();
 	}
 
 

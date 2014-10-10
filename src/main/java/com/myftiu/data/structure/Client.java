@@ -11,7 +11,6 @@ public class Client {
 	private String name;
 	private String address;
 	private Organisation organisation;
-	private List<ShoppingCart> shoppingCart;
 
 	public Client(){
 	}
@@ -46,14 +45,6 @@ public class Client {
 		this.name = name;
 	}
 
-	public List<ShoppingCart> getShoppingCart()
-	{
-		return shoppingCart;
-	}
-
-	public List<ShoppingCart> createShoppingCart() {
-		return new LinkedList();
-	}
 
 	@Override
 	public String toString()

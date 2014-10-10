@@ -16,7 +16,7 @@ import static org.junit.Assert.assertThat;
 public class OragnisationTest {
 
 	private static final WebCartService WEB_CART_SERVICE = new WebCartService();
-	private static final Organisation ORGANISATION = WEB_CART_SERVICE.getOrganisationRoot();
+	private static final Organisation ORGANISATION = WEB_CART_SERVICE.getOrganisation();
 	private static final Organisation node4 = new Organisation("Sub Org 4");
 
 

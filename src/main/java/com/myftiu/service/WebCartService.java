@@ -17,6 +17,9 @@ import java.util.List;
 public class WebCartService {
 
 	private Client client;
+	private ShoppingCart shoppingCart;
+	private Products products;
+	private Organisation organisation;
 
 	private Organisation createOrganisation() {
 
@@ -35,14 +38,15 @@ public class WebCartService {
 	private ShoppingCart createShoppingCart() {
 		int index = 0;
 		ShoppingCart shoppingCart = new ShoppingCart(client);
+		shoppingCart.setId(12345);
 		List<Products> products = new LinkedList<Products>();
 		while (index < 10) {
 			products.add(createProducts());
 			index++;
 		}
 		shoppingCart.setProducts(products);
+		shoppingCart.setClient(createClient());
 		return shoppingCart;
-
 	}
 
 
@@ -59,9 +63,24 @@ public class WebCartService {
 		return client;
 	}
 
-	public Organisation getOrganisationRoot() {
-		return createOrganisation();
+
+	public Client getClient()
+	{
+		return createClient();
 	}
 
+	public ShoppingCart getShoppingCart()
+	{
+		return createShoppingCart();
+	}
 
+	public Products getProducts()
+	{
+		return createProducts();
+	}
+
+	public Organisation getOrganisation()
+	{
+		return createOrganisation();
+	}
 }
