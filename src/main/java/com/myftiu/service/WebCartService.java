@@ -45,6 +45,7 @@ public class WebCartService {
 		while (index < 3) {
             Products createdProduct = createProducts();
             createdProduct.setId(index);
+            createdProduct.setName("Product " + index);
 			products.add(createdProduct);
 			index++;
 		}

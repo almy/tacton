@@ -24,7 +24,8 @@
 
                 dataType: "text",
                 success: function(data) {
-                    document.getElementById('test').innerHTML = ToHTML(ToNestedObject($.parseJSON(data)));
+                    var html =  print($.parseJSON(data));
+                    document.getElementById('test').innerHTML = html;
 
                 }
             });
@@ -46,8 +47,31 @@
             return html;
         }
 
-        function ToNestedObject(input){
-            var i, y, len = input.length, parts, partsLen, obj = {}, prev;
+        function print(input){
+            var clientData = input.client;
+            var cartId = input.id;
+            var div;
+
+            var clientHtml = '<table>' +
+                    '<tr><td>Cart id</td><td>'+ cartId+'</td></tr>' +
+                    '<tr><td>Name</td><td>'+ clientData.name+'</td></tr>' +
+                    '<tr><td>Address</td><td>'+ clientData.address+'</td></tr>' +
+                    '</table>'
+
+
+            var len = input.products.length;
+
+            var table = '<table>'
+            for(i = 0; i<len; i++) {
+                table += '<tr><td>'+ +'</td><td></td><td></td>'
+                var attributesLen = input.products[i].attributes;
+
+            }
+
+            table += '</table>'
+
+           /*
+            var i, y, len = input.products.length, parts, partsLen, obj = {}, prev;
             for(i = 0; i < len; i++){
                 parts = input[i].cat.split('/');
                 partsLen = parts.length;
@@ -62,6 +86,8 @@
                 prev.ids.push(input[i].id);
             }
             return obj;
+            */
+            return clientHtml;
         }
 
     });

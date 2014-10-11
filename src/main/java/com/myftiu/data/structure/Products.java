@@ -9,6 +9,7 @@ import java.util.Map;
 public class Products {
 
     private int id;
+    private String name;
 	private Map attributes;
 
 
@@ -38,10 +39,19 @@ public class Products {
         this.attributes = attributes;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "Products{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
                 ", attributes=" + attributes +
                 '}';
     }
