@@ -17,7 +17,7 @@
 
 
         $.ajax({
-                url: "http://localhost:8181/v1/cart/print/webcart/1",
+                url: "http://localhost:8181/v1/cart/print/organisation",
                 type: "GET",
                 crossDomain: true,
                 dataType: 'jsonp',
@@ -33,17 +33,16 @@
 
 
         function print(input){
-            var clientData = input.client;
-            var cartId = input.id;
-            var div;
-
-            var clientHtml = '<table>' +
-                    '<tr><td>Cart id</td><td>'+ cartId+'</td></tr>' +
-                    '<tr><td>Name</td><td>'+ clientData.name+'</td></tr>' +
-                    '<tr><td>Address</td><td>'+ clientData.address+'</td></tr>' +
-                    '</table>'
+            var root = input.data;
+            var leafs = input.subOrgs;
 
 
+
+
+            var clientHtml = '<table>' + '<tr><td>Name</td><td>'+ root+'</td></tr>'
+            clientHtml += printLeafs(leafs);
+            clientHtml += '</table>';
+            /*
             var len = input.products.length;
 
             var table = '<table>'
@@ -65,8 +64,22 @@
             table += '</table>';
 
             clientHtml += table;
-
+             */
             return clientHtml;
+
+            function printLeafs(leafs) {
+                var len = leafs.length;
+                var html = '';
+                for(i = 0; i<len; i++) {
+                      html += '<td>' + leafs[i].data + '</td>' ;
+                      if(leafs[i].leaf == false) {
+                          html += '<tr>' + printLeafs(leafs[i].subOrgs) + '</tr>';
+                      }
+                }
+
+            return html;
+            }
+
         }
 
     });
