@@ -1,6 +1,6 @@
 package unitTests;
 
-import com.myftiu.service.Numbers;
+import com.myftiu.service.NumbersService;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -14,10 +14,11 @@ public class NumbersTest {
 
 	private final int number = 9;
 	private final int expectedNumber = 34;
+    private static final NumbersService NUMBERS_SERVICE = new NumbersService();
 
 	@Test
 	public void testCase() {
-		assertEquals(expectedNumber, Numbers.calculateNumber(number));
+		assertEquals(expectedNumber, NUMBERS_SERVICE.calculateNumber(number));
 	}
 
 }

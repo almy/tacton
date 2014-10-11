@@ -2,6 +2,7 @@ package com.myftiu.rest;
 
 import com.myftiu.data.structure.Organisation;
 import com.myftiu.data.structure.ShoppingCart;
+import com.myftiu.service.NumbersService;
 import com.myftiu.service.WebCartService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,9 @@ public class WebCartRest
 	@Autowired
 	private WebCartService webCartService;
 
+    @Autowired
+    private NumbersService numbersService;
+
 
 	@RequestMapping(value = "/print/webcart/{id}", method = RequestMethod.GET, produces = "application/json")
 	public ShoppingCart getTransaction(@PathVariable("id") int cartId)
@@ -40,6 +44,15 @@ public class WebCartRest
 		log.info("getting all information for the organisation");
 		return webCartService.getOrganisation();
 	}
+
+    @RequestMapping(value = "/print/numbers/{number}", method = RequestMethod.GET, produces = "application/json")
+    public int getNumber(@PathVariable("number") int number)
+    {
+        log.info("retrieving number with index {}" , number);
+        return numbersService.calculateNumber(number);
+    }
+
+
 
 
 }

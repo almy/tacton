@@ -4,7 +4,7 @@
     <title></title>
 </head>
 <body>
-
+    <div id='test'></div>
 </body>
 </html>
 
@@ -14,30 +14,55 @@
     //When DOM loaded we attach click event to button
     $(document).ready(function() {
 
-    var data;
+
 
         $.ajax({
-                url: "http://localhost:8181/v1/cart/print/organisation",
+                url: "http://localhost:8181/v1/cart/print/webcart/1",
                 type: "GET",
                 crossDomain: true,
                 dataType: 'jsonp',
-                //force to handle it as text
+
                 dataType: "text",
                 success: function(data) {
-                    data = $.parseJSON(data);
-
+                    document.getElementById('test').innerHTML = ToHTML(ToNestedObject($.parseJSON(data)));
 
                 }
             });
 
 
-        printOrganisation();
+        function ToHTML(input){
+            var html = '<ul>';
 
+            for(var key in input){
+                if(input[key] instanceof Array){
+                    for(var i = 0; i < input[key].length; i++){
+                        html += '<li>' + input[key][i] + '</li>';
+                    }
+                }else{
+                    html += '<li>' + key + ToHTML(input[key]) + '</li>';
+                }
+            }
+            html += '</ul>';
+            return html;
+        }
 
-
-    function printOrganisation() {
-
-    }
+        function ToNestedObject(input){
+            var i, y, len = input.length, parts, partsLen, obj = {}, prev;
+            for(i = 0; i < len; i++){
+                parts = input[i].cat.split('/');
+                partsLen = parts.length;
+                prev = obj;
+                for(y = 0; y < partsLen; y++){
+                    prev[parts[y]] = prev[parts[y]] || {};
+                    prev = prev[parts[y]];
+                }
+                if(!prev.ids){
+                    prev.ids = [];
+                }
+                prev.ids.push(input[i].id);
+            }
+            return obj;
+        }
 
     });
 </script>

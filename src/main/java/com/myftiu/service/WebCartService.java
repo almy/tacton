@@ -6,8 +6,10 @@ import com.myftiu.data.structure.Products;
 import com.myftiu.data.structure.ShoppingCart;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author by ali myftiu on 09/10/14.
@@ -40,8 +42,10 @@ public class WebCartService {
 		ShoppingCart shoppingCart = new ShoppingCart(client);
 		shoppingCart.setId(12345);
 		List<Products> products = new LinkedList<Products>();
-		while (index < 10) {
-			products.add(createProducts());
+		while (index < 3) {
+            Products createdProduct = createProducts();
+            createdProduct.setId(index);
+			products.add(createdProduct);
 			index++;
 		}
 		shoppingCart.setProducts(products);
@@ -52,8 +56,13 @@ public class WebCartService {
 
 	private Products createProducts() {
 		Products products = new Products();
-		products.setAttributes(Double.toString(Math.random()));
-		products.setValue(Double.toString(Math.random()));
+        Map attributes = new HashMap<Integer, Integer>();
+        int index = 0;
+        while (index < 4) {
+            attributes.put(Math.random(), Math.random());
+            index++;
+        }
+        products.setAttributes(attributes);
 		return products;
 	}
 
