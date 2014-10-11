@@ -35,46 +35,39 @@
         function print(input){
             var root = input.data;
             var leafs = input.subOrgs;
+            var depth = input.depth;
 
 
 
 
-            var clientHtml = '<table>' + '<tr><td>Name</td><td>'+ root+'</td></tr>'
-            clientHtml += printLeafs(leafs);
-            clientHtml += '</table>';
-            /*
-            var len = input.products.length;
-
-            var table = '<table>'
-            for(i = 0; i<len; i++) {
-                var product = input.products[i];
-                table += '<tr><td>'+ product.name +'</td><td></td><td></td></tr>'
-                var array = JSON.stringify(product.attributes);
-                var attributes = array.split(',');
-                    for(j = 0; j < attributes.length; j++) {
-                        var f = (attributes[j]).replace(/{|}|"/g,'');
-                        var attribute = f.split(':');
-                        var value1 = attribute[0];
-                        var value2 = attribute[1];
-                        table += '<tr><td></td><td>'+attribute[0]+'</td><td>'+attribute[1]+'</td></tr>'
-                    }
-
+            var clientHtml = '<table>' + '<tr><td>'+root+'</td>'
+            var index = 1;
+            for(i = 1; i<depth; i++) {
+                clientHtml += '<td></td>'
             }
+            clientHtml += '</td></tr>'
+            clientHtml += printLeafs(leafs, depth, index);
+            clientHtml += '</table>';
 
-            table += '</table>';
-
-            clientHtml += table;
-             */
             return clientHtml;
 
-            function printLeafs(leafs) {
+            function printLeafs(leafs, depth, index) {
                 var len = leafs.length;
                 var html = '';
+
                 for(i = 0; i<len; i++) {
-                      html += '<td>' + leafs[i].data + '</td>' ;
-                      if(leafs[i].leaf == false) {
-                          html += '<tr>' + printLeafs(leafs[i].subOrgs) + '</tr>';
+                    html += '<tr>'
+                      for(j = 0; j<depth; j++) {
+                          if(index == j) {
+                          html += '<td>' + leafs[i].data + '</td><tr>' ;
+                          if(leafs[i].leaf == false) {
+                              html += '<td>' + printLeafs(leafs[i].subOrgs, depth, index + 1) + '</td>';
+                          }
+                          } else {
+                              html += '<td></td>';
+                          }
                       }
+                    html += '</tr>'
                 }
 
             return html;

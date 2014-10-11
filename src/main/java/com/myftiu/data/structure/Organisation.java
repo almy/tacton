@@ -13,6 +13,7 @@ public class Organisation<T> implements Iterable<Organisation<T>> {
 	public T data;
 	public Organisation<T> root;
 	public List<Organisation<T>> subOrgs;
+    public int depth = 1;
 
 	public boolean isRoot() {
 		return root == null;
@@ -36,6 +37,7 @@ public class Organisation<T> implements Iterable<Organisation<T>> {
 		childNode.root = this;
 		this.subOrgs.add(childNode);
 		this.registerChildForSearch(childNode);
+        depth++;
 		return childNode;
 	}
 
@@ -73,6 +75,9 @@ public class Organisation<T> implements Iterable<Organisation<T>> {
 		NodeIterator<T> iter = new NodeIterator<T>(this);
 		return iter;
 	}
+
+
+
 
 
 
