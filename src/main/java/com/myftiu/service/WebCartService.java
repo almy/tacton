@@ -68,6 +68,7 @@ public class WebCartService {
 
 	private Client createClient() {
 		client = new Client();
+        client.setName("Mario Rossi");
 		client.setAddress("Smart Street 1122");
 		return client;
 	}
