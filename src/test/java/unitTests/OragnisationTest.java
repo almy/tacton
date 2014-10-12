@@ -33,7 +33,7 @@ public class OragnisationTest {
 	@Test
 	public void testOrganisation() {
 
-		assertEquals(ORGANISATION.findTreeNode(searchCriteria).toString(), node4.toString());
+		assertEquals(ORGANISATION.findSuborganisation(searchCriteria).toString(), node4.toString());
 	}
 
 

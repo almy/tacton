@@ -36,7 +36,7 @@ public class Organisation<T> implements Iterable<Organisation<T>> {
 		Organisation<T> childNode = new Organisation<T>(child);
 		childNode.root = this;
 		this.subOrgs.add(childNode);
-		this.registerChildForSearch(childNode);
+		this.addOrganisationInSchema(childNode);
         depth++;
 		return childNode;
 	}
@@ -49,13 +49,13 @@ public class Organisation<T> implements Iterable<Organisation<T>> {
 			return root.getLevel() + 1;
 	}
 
-	private void registerChildForSearch(Organisation<T> node) {
+	private void addOrganisationInSchema(Organisation<T> node) {
 		elementsIndex.add(node);
 		if (root != null)
-			root.registerChildForSearch(node);
+			root.addOrganisationInSchema(node);
 	}
 
-	public Organisation<T> findTreeNode(Comparable<T> cmp) {
+	public Organisation<T> findSuborganisation(Comparable<T> cmp) {
 		for (Organisation<T> element : this.elementsIndex) {
 			T elData = element.data;
 			if (cmp.compareTo(elData) == 0)
