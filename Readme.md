@@ -1,3 +1,4 @@
+[![Circle CI](https://circleci.com/gh/myftiu/tacton.svg?style=svg)](https://circleci.com/gh/myftiu/tacton)
 The task has been conceived as a microservice that is accesseible via http calls.
 
 1. git clone - to download the code locally
